@@ -1,9 +1,11 @@
-package com.mygdx.game;
+package com.mygdx.game.objects;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
+import com.mygdx.game.GameSettings;
+import com.mygdx.game.objects.GameObject;
 
 public class ShipObject extends GameObject {
     public ShipObject(int x, int y, int width, int height, String texturePath, World world) {

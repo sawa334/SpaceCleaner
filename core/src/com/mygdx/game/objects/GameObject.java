@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.objects;
 
 import static com.mygdx.game.GameSettings.SCALE;
 
