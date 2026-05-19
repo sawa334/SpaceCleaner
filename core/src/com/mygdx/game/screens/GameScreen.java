@@ -5,9 +5,11 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.GameSession;
 import com.mygdx.game.GameSettings;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.objects.BulletObject;
 import com.mygdx.game.objects.ShipObject;
 import com.mygdx.game.GameResources;
 import com.mygdx.game.objects.TrashObject;
@@ -21,6 +23,7 @@ public class GameScreen extends ScreenAdapter {
     GameSession gameSession;
 
     ArrayList<TrashObject> trashArray;
+    ArrayList<BulletObject> bulletArray;
 
     private void updateTrash() {
         for (int i = 0; i < trashArray.size(); i++) {
@@ -31,12 +34,23 @@ public class GameScreen extends ScreenAdapter {
         }
     }
 
+    private void updateBullet(){
+        for (int i = 0; i < bulletArray.size(); i++){
+            if (bulletArray.get(i).hasToBeDestroyed()) {
+                myGdxGame.world.destroyBody(bulletArray.get(i).body);
+                bulletArray.remove(i--);
+            }
+        }
+    }
+
+
 
 
     public GameScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         gameSession = new GameSession();
         trashArray = new ArrayList<>();
+        bulletArray = new ArrayList<>();
 
 
 
@@ -65,9 +79,21 @@ public class GameScreen extends ScreenAdapter {
             );
             trashArray.add(trashObject);
         }
+
+        if (shipObject.needToShoot()){
+            BulletObject laserBullet = new BulletObject(
+                    shipObject.getX(), shipObject.getY() + shipObject.height / 2,
+                    GameSettings.BULLET_WIDTH, GameSettings.BULLET_HEIGHT,
+                    GameResources.BULLET_IMG_PATH,
+                    myGdxGame.world
+            );
+            bulletArray.add(laserBullet);
+        }
         updateTrash();
+        updateBullet();
         draw();
     }
+
 
     private void handleInput() {
         if (Gdx.input.isTouched()) {
@@ -84,6 +110,7 @@ public class GameScreen extends ScreenAdapter {
         myGdxGame.batch.begin();
         shipObject.draw(myGdxGame.batch);
         for (TrashObject trash : trashArray) trash.draw(myGdxGame.batch);
+        for (BulletObject bulletObject : bulletArray) bulletObject.draw(myGdxGame.batch);
         myGdxGame.batch.end();
     }
 

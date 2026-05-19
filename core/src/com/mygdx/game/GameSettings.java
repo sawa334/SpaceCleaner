@@ -21,5 +21,7 @@ public class GameSettings {
 
     public static final int BULLET_VELOCITY = 200;
 
-    public static final int SHOOTING_COOL_DOWN = 1;
+    public static final int SHOOTING_COOL_DOWN = 390;
+    public static final int BULLET_WIDTH = 15;
+    public static final int BULLET_HEIGHT = 45;
 }

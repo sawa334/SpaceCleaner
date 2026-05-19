@@ -44,4 +44,16 @@ public class ShipObject extends GameObject {
 
     }
 
+
+    long lastShotTime;
+    public boolean needToShoot(){
+
+        if(TimeUtils.millis() - lastShotTime >= GameSettings.SHOOTING_COOL_DOWN){
+            lastShotTime = TimeUtils.millis();
+            return true;
+        }
+        return false;
+
+    }
+
 }
