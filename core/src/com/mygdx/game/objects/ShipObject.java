@@ -9,9 +9,11 @@ import com.mygdx.game.GameSettings;
 import com.mygdx.game.objects.GameObject;
 
 public class ShipObject extends GameObject {
+     public int livesLeft;
     public ShipObject(int x, int y, int width, int height, String texturePath, World world) {
-        super(texturePath, x, y, width, height, world);
+        super(texturePath, x, y, width, height, GameSettings.SHIP_BIT, world);
         body.setLinearDamping(10);
+        livesLeft = 3;
     }
     private void putInFrame() {
         if (getY() > (GameSettings.SCREEN_HEIGHT / 2f - height / 2f)) {
@@ -42,6 +44,14 @@ public class ShipObject extends GameObject {
                 true
         );
 
+    }
+    @Override
+    public void hit(){
+        livesLeft -= 1;
+    }
+
+    public boolean isAlive() {
+        return livesLeft > 0;
     }
 
 
