@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.ContactManager;
 import com.mygdx.game.GameSession;
 import com.mygdx.game.GameSettings;
+import com.mygdx.game.MovingBackgroundView;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.objects.BulletObject;
 import com.mygdx.game.objects.ShipObject;
@@ -58,6 +59,8 @@ public class GameScreen extends ScreenAdapter {
 
         trashArray = new ArrayList<>();
         bulletArray = new ArrayList<>();
+
+        MovingBackgroundView backgroundView = new MovingBackgroundView(GameResources.BACKGROUND_IMG_PATH);
 
 
 
