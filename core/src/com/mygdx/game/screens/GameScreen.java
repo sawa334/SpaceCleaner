@@ -9,6 +9,8 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.ContactManager;
 import com.mygdx.game.GameSession;
 import com.mygdx.game.GameSettings;
+import com.mygdx.game.ImageView;
+import com.mygdx.game.LiveView;
 import com.mygdx.game.MovingBackgroundView;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.objects.BulletObject;
@@ -24,8 +26,13 @@ public class GameScreen extends ScreenAdapter {
 
     GameSession gameSession;
 
+    ImageView topBlackoutView;
+
     ArrayList<TrashObject> trashArray;
     ArrayList<BulletObject> bulletArray;
+
+    MovingBackgroundView backgroundView;
+    LiveView liveView;
 
 
 
@@ -54,13 +61,16 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         gameSession = new GameSession();
+        liveView = new LiveView(305, 1215);
 
         contactManager = new ContactManager(myGdxGame.world);
 
         trashArray = new ArrayList<>();
         bulletArray = new ArrayList<>();
 
-        MovingBackgroundView backgroundView = new MovingBackgroundView(GameResources.BACKGROUND_IMG_PATH);
+        topBlackoutView = new ImageView(0, 1180, GameResources.BACKGROUND_IMG_PATH);
+
+        backgroundView = new MovingBackgroundView(GameResources.BACKGROUND_IMG_PATH);
 
 
 
@@ -80,7 +90,9 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta){
         myGdxGame.stepWorld();
+        backgroundView.move();
         handleInput();
+        liveView.setLeftLives(shipObject.getLiveLeft());
         if (gameSession.shouldSpawnTrash()) {
             TrashObject trashObject = new TrashObject(
                     GameSettings.TRASH_WIDTH, GameSettings.TRASH_HEIGHT,
@@ -122,9 +134,15 @@ public class GameScreen extends ScreenAdapter {
         ScreenUtils.clear(Color.CLEAR);
 
         myGdxGame.batch.begin();
+        backgroundView.draw(myGdxGame.batch);
         shipObject.draw(myGdxGame.batch);
+
         for (TrashObject trash : trashArray) trash.draw(myGdxGame.batch);
         for (BulletObject bulletObject : bulletArray) bulletObject.draw(myGdxGame.batch);
+
+
+        topBlackoutView.draw(myGdxGame.batch);
+        liveView.draw(myGdxGame.batch);
         myGdxGame.batch.end();
     }
 

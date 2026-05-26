@@ -8,7 +8,7 @@ public class View implements Disposable {
     float x;
     float y;
 
-    float wigth;
+    float width;
     float height;
 
 
