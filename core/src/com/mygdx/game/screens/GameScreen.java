@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
+import com.mygdx.game.ButtonView;
 import com.mygdx.game.ContactManager;
 import com.mygdx.game.GameSession;
 import com.mygdx.game.GameSettings;
@@ -13,6 +14,7 @@ import com.mygdx.game.ImageView;
 import com.mygdx.game.LiveView;
 import com.mygdx.game.MovingBackgroundView;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.TextView;
 import com.mygdx.game.objects.BulletObject;
 import com.mygdx.game.objects.ShipObject;
 import com.mygdx.game.GameResources;
@@ -33,6 +35,10 @@ public class GameScreen extends ScreenAdapter {
 
     MovingBackgroundView backgroundView;
     LiveView liveView;
+    TextView scoreTextView;
+    ButtonView pauseButton;
+
+
 
 
 
@@ -61,9 +67,11 @@ public class GameScreen extends ScreenAdapter {
     public GameScreen(MyGdxGame myGdxGame) {
         this.myGdxGame = myGdxGame;
         gameSession = new GameSession();
+        pauseButton = new ButtonView(605, 1200, 46, 54, GameResources.PAUSE_IMG_PATH);
         liveView = new LiveView(305, 1215);
 
         contactManager = new ContactManager(myGdxGame.world);
+        scoreTextView = new TextView(myGdxGame.commonWhiteFont, 50, 1215);
 
         trashArray = new ArrayList<>();
         bulletArray = new ArrayList<>();
@@ -91,6 +99,7 @@ public class GameScreen extends ScreenAdapter {
     public void render(float delta){
         myGdxGame.stepWorld();
         backgroundView.move();
+        scoreTextView.setText("Score: " + 100);
         handleInput();
         liveView.setLeftLives(shipObject.getLiveLeft());
         if (gameSession.shouldSpawnTrash()) {
@@ -142,7 +151,9 @@ public class GameScreen extends ScreenAdapter {
 
 
         topBlackoutView.draw(myGdxGame.batch);
+        scoreTextView.draw(myGdxGame.batch);
         liveView.draw(myGdxGame.batch);
+        pauseButton.draw(myGdxGame.batch);
         myGdxGame.batch.end();
     }
 
