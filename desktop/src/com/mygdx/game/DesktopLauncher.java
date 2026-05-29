@@ -18,5 +18,6 @@ public class DesktopLauncher {
 		config.setTitle("Space Cleaner");
 		config.setWindowedMode(GameSettings.SCREEN_WIDTH, GameSettings.SCREEN_HEIGHT);
 		new Lwjgl3Application(new MyGdxGame(), config);
+
 	}
 }

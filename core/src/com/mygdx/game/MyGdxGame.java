@@ -20,7 +20,9 @@ import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.screens.GameScreen;
-
+import com.mygdx.game.screens.MenuScreen;
+import com.mygdx.game.managers.AudioManager;
+import com.mygdx.game.screens.SettingsScreen;
 
 
 public class MyGdxGame extends Game {
@@ -30,6 +32,9 @@ public class MyGdxGame extends Game {
 	public OrthographicCamera camera;
 
 	 public BitmapFont  commonWhiteFont;
+	 public BitmapFont largeWhiteFont;
+
+	 public BitmapFont commonBlackFont;
 
 	public World world;
 
@@ -39,9 +44,16 @@ public class MyGdxGame extends Game {
 
 	public Vector3 touch;
 
+	public MenuScreen menuScreen;
+	public SettingsScreen settingsScreen;
+	public AudioManager audioManager;
 
-	
-	
+
+
+
+
+
+
 	@Override
 	public void create () {
 	 	Box2D.init();
@@ -49,14 +61,23 @@ public class MyGdxGame extends Game {
 
 
 		commonWhiteFont = FontBuilder.generate(24, Color.WHITE, GameResources.FONT_PATH);
+		largeWhiteFont = FontBuilder.generate(48, Color.WHITE, GameResources.FONT_PATH);
+		commonBlackFont = FontBuilder.generate(24, Color.BLACK, GameResources.FONT_PATH);
+
+
+
 
 		batch = new SpriteBatch();
+		audioManager = new AudioManager();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, GameSettings.SCREEN_WIDTH, GameSettings.SCREEN_HEIGHT);
 
 		gameScreen = new GameScreen(this);
+		menuScreen = new MenuScreen(this);
+		settingsScreen = new SettingsScreen(this);
 
-	    setScreen(gameScreen);
+
+		setScreen(menuScreen);
 	}
 
 	public void stepWorld() {
