@@ -1,10 +1,8 @@
 package com.mygdx.game.objects;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.utils.TimeUtils;
-import com.mygdx.game.GameSettings;
+import com.mygdx.game.game.GameSettings;
 
 public class BulletObject extends GameObject {
 

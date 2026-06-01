@@ -2,8 +2,7 @@ package com.mygdx.game.objects;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.mygdx.game.GameSettings;
-import com.mygdx.game.objects.GameObject;
+import com.mygdx.game.game.GameSettings;
 
 import java.util.Random;
 

@@ -1,6 +1,4 @@
-package com.mygdx.game;
-
-import com.badlogic.gdx.physics.box2d.World;
+package com.mygdx.game.game;
 
 public class GameResources {
     public static final String SHIP_IMG_PATH = "textures/ship.png";
@@ -24,5 +22,6 @@ public class GameResources {
     public static final String DESTROY_SOUND_PATH = "sounds/destroy.mp3";
     public static final String BLACKOUT_TOP_IMG_PATH = "textures/blackout_top.png";
     public static final String BLACKOUT_MIDDLE_IMG_PATH = "textures/blackout_middle.png";
-    ;
+
+
 }

@@ -5,8 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.mygdx.game.GameSettings;
-import com.mygdx.game.objects.GameObject;
+import com.mygdx.game.game.GameSettings;
 
 public class ShipObject extends GameObject {
      public int livesLeft;

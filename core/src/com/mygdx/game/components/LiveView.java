@@ -2,7 +2,7 @@ package com.mygdx.game.components;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.GameResources;
+import com.mygdx.game.game.GameResources;
 
 public class LiveView extends View{
 

@@ -5,12 +5,15 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.GameResources;
-import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.game.GameResources;
+import com.mygdx.game.game.MyGdxGame;
 import com.mygdx.game.components.ButtonView;
 import com.mygdx.game.components.ImageView;
 import com.mygdx.game.components.MovingBackgroundView;
 import com.mygdx.game.components.TextView;
+import com.mygdx.game.managers.MemoryManager;
+
+import java.util.ArrayList;
 
 public class SettingsScreen extends ScreenAdapter {
     MyGdxGame myGdxGame;
@@ -51,16 +54,20 @@ public class SettingsScreen extends ScreenAdapter {
             }
             if (clearSettingView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
                 clearSettingView.setText("clear records (cleared)");
+                MemoryManager.saveTableOfRecords(new ArrayList<Integer>());
             }
             if (musicSettingView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                myGdxGame.audioManager.isMusicOn = !myGdxGame.audioManager.isMusicOn;
-                musicSettingView.setText("music: " + translateStateToText(myGdxGame.audioManager.isMusicOn));
+                MemoryManager.saveMusicSettings(!MemoryManager.loadIsMusicOn());
+                musicSettingView.setText("music: " + translateStateToText(MemoryManager.loadIsMusicOn()));
                 myGdxGame.audioManager.updateMusicFlag();
             }
             if (soundSettingView.isHit(myGdxGame.touch.x, myGdxGame.touch.y)) {
-                myGdxGame.audioManager.isSoundOn = !myGdxGame.audioManager.isSoundOn;
-                soundSettingView.setText("sound: " + translateStateToText(myGdxGame.audioManager.isSoundOn));
+                MemoryManager.saveSoundSettings(!MemoryManager.loadIsSoundOn());
+                soundSettingView.setText("sound: " + translateStateToText(MemoryManager.loadIsSoundOn()));
+                myGdxGame.audioManager.updateSoundFlag();
+
             }
+
         }
     }
     @Override

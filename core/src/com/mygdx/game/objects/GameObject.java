@@ -1,6 +1,6 @@
 package com.mygdx.game.objects;
 
-import static com.mygdx.game.GameSettings.SCALE;
+import static com.mygdx.game.game.GameSettings.SCALE;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
