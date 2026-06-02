@@ -136,13 +136,12 @@ public class GameScreen extends ScreenAdapter {
 
         if (gameSession.state == GameState.PLAYING) {
             if (gameSession.shouldSpawnTrash()) {
-                TrashObject trashObject = new TrashObject(
-                        GameSettings.TRASH_WIDTH, GameSettings.TRASH_HEIGHT,
-                        GameResources.TRASH_IMG_PATH,
-                        myGdxGame.world
+              TrashObject trashObject =  (Math.random() < 0.5) ?
+                      new TrashObject(GameSettings.TRASH_WIDTH, GameSettings.TRASH_HEIGHT, GameResources.TRASH_IMG_PATH, myGdxGame.world, 1) :
+                      new TrashObject(GameSettings.ASTEROID_WIDTH, GameSettings.ASTEROID_HEIGHT, GameResources.ASTEROID_IMG_PATH, myGdxGame.world,2);
 
-                );
-                trashArray.add(trashObject);
+
+                      trashArray.add(trashObject);
 
                 if (!shipObject.isAlive()) {
                     System.out.println("Game over!");

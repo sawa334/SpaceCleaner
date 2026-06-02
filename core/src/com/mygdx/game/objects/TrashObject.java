@@ -10,7 +10,7 @@ public class TrashObject extends GameObject {
 
     private static final int paddingHorizontal = 30;
     private int livesLeft;
-   public TrashObject( int width, int height,String texturePath, World world) {
+   public TrashObject( int width, int height,String texturePath, World world, int lives) {
         super(texturePath,
                 width / 2 + paddingHorizontal + (new Random()).nextInt((GameSettings.SCREEN_WIDTH - 2 * paddingHorizontal - width)),
                 GameSettings.SCREEN_HEIGHT + height / 2,
@@ -19,7 +19,7 @@ public class TrashObject extends GameObject {
                 world
         );
        body.setLinearVelocity(new Vector2(0, -GameSettings.TRASH_VELOCITY));
-       livesLeft = 1;
+       livesLeft = lives;
 
     }
 
